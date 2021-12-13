@@ -10,6 +10,10 @@ public class BeanBrand {
         this.description = description;
     }
 
+    public BeanBrand() {
+
+    }
+
     public int getId_brand() {
         return id_brand;
     }
