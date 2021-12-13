@@ -4,12 +4,12 @@ public class BeanProduct {
     private int id_product;
     private String name;
     private int quantity;
-    private int price;
+    private double price;
     private String description;
     private int barnd_id_brand;
     private int category_id_category;
 
-    public BeanProduct(String name, int quantity, int price, String description, int brand_id_brand,
+    public BeanProduct(String name, int quantity, double price, String description, int brand_id_brand,
                        int category_id_category) {
         this.name = name;
         this.quantity = quantity;
@@ -43,7 +43,7 @@ public class BeanProduct {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

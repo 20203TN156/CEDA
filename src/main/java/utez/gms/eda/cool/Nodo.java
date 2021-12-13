@@ -1,21 +1,21 @@
 package utez.gms.eda.cool;
 
 public class Nodo {
-    private String dato;
+    private Object dato;
     private Nodo next;
     private Nodo prev;
 
-    public Nodo(String dato) {
+    public Nodo(Object dato) {
         this.dato = dato;
         this.next = null;
         this.prev = null;
     }
 
-    public String getDato() {
+    public Object getDato() {
         return dato;
     }
 
-    public void setDato(String dato) {
+    public void setDato(Object dato) {
         this.dato = dato;
     }
 

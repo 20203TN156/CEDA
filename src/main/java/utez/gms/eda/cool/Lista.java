@@ -13,7 +13,7 @@ public class Lista {
         return this.primero == null;
     }
 
-    public void add(String dato){
+    public void add(Object dato){
         Nodo aux = primero;
         if (isEmpty()){
             Nodo nuevo = new Nodo(dato);

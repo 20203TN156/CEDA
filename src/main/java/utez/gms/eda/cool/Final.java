@@ -23,7 +23,8 @@ public class Final {
             int cambio;
             String name, description;
             int barnd_id_brand, category_id_category;
-            int price, quantity;
+            int quantity;
+            double price;
             int id_delete, id_update;
             repeat = 1;
 
@@ -73,7 +74,7 @@ public class Final {
                             System.out.println("ID de la marca: ");
                             barnd_id_brand = print.nextInt();
                             printCategory();
-                            System.out.println("ID de la categoría");
+                            System.out.println("ID de la categoría: ");
                             category_id_category = print.nextInt();
                             BeanProduct beanProduct = new BeanProduct(name, quantity, price, description,
                                     barnd_id_brand, category_id_category);
@@ -115,7 +116,14 @@ public class Final {
                     cambio = print.nextInt();
                     switch (cambio) {
                         case 1:
-
+                            printBrand();
+                            System.out.print("Marca a actualizar: ");
+                            id_update = print.nextInt();
+                            System.out.print("Nombre: ");
+                            name = print.next();
+                            System.out.print("Descrición: ");
+                            description = print.next();
+                            updateBrand(name,description , id_update);
                             break;
                         case 2:
                             printCategory();
@@ -128,6 +136,24 @@ public class Final {
                             updateCategory(name,description , id_update);
                             break;
                         case 3:
+                            printProduct();
+                            System.out.print("Producto a actualizar: ");
+                            id_update = print.nextInt();
+                            System.out.print("Nombre: ");
+                            name = print.next();
+                            System.out.print("Cantidad: ");
+                            quantity = print.nextInt();
+                            System.out.print("Precio: ");
+                            price = print.nextDouble();
+                            System.out.print("Descrición: ");
+                            description = print.next();
+                            printCategory();
+                            System.out.print("Categoría: ");
+                            category_id_category = print.nextInt();
+                            printBrand();
+                            System.out.print("Marca: ");
+                            barnd_id_brand = print.nextInt();
+                            updateProduct(name, quantity, price, description, category_id_category, barnd_id_brand, id_update);
                             break;
                         case 4:
                             repeat = 2;
@@ -292,6 +318,41 @@ public class Final {
             pst.executeUpdate();
             pst.close();
             System.out.println("Categoría actualizada con éxito");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateBrand(String name, String description, int id_brand){
+        PreparedStatement pst;
+        try {
+            pst = getConnection().prepareStatement("UPDATE brand SET name_brand = ?, description = ? WHERE (id_brand= ?);");
+            pst.setString(1, name);
+            pst.setString(2, description);
+            pst.setInt(3, id_brand);
+            pst.executeUpdate();
+            pst.close();
+            System.out.println("Marca actualizada con éxito");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateProduct(String name, int quantity, double price, String description, int brand_id_brand, int category_id_category, int id_product){
+        PreparedStatement pst;
+        try {
+            pst = getConnection().prepareStatement("UPDATE product SET name_product = ?, quantity = ?, price = ?, " +
+                    "description = ?, brand_id_brand = ?, category_id_category = ? WHERE (id_product = ?);");
+            pst.setString(1, name);
+            pst.setInt(2, quantity);
+            pst.setDouble(3, price);
+            pst.setString(4, description);
+            pst.setInt(5,brand_id_brand);
+            pst.setInt(6, category_id_category);
+            pst.setInt(7, id_product);
+            pst.executeUpdate();
+            pst.close();
+            System.out.println("Producto actualizado con éxito");
         } catch (SQLException e) {
             e.printStackTrace();
         }
