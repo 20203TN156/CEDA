@@ -10,7 +10,7 @@ import static utez.gms.eda.cool.Conexion.getConnection;
 public class Brand {
 
     public void insertBrand(BeanBrand beanBrand) {
-        PreparedStatement pst = null;
+        PreparedStatement pst;
         try {
             pst = getConnection().prepareStatement("INSERT INTO brand (name_brand, description) VALUES (?, ?);");
             pst.setString(1, beanBrand.getName_brand());

@@ -3,6 +3,9 @@ package utez.gms.eda.cool;
 import utez.gms.eda.cool.bean.BeanBrand;
 import utez.gms.eda.cool.bean.BeanCategory;
 import utez.gms.eda.cool.bean.BeanProduct;
+import utez.gms.eda.cool.listnodos.ListaBrand;
+import utez.gms.eda.cool.listnodos.ListaCategory;
+import utez.gms.eda.cool.listnodos.ListaProduct;
 import utez.gms.eda.cool.pro.Brand;
 import utez.gms.eda.cool.pro.Category;
 import utez.gms.eda.cool.pro.Product;
@@ -194,7 +197,7 @@ public class Final {
     }
 
     public void printBrand() {
-        Lista lista = new Lista();
+        ListaBrand lista = new ListaBrand();
         try {
             Statement st = getConnection().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM brand");
@@ -205,6 +208,7 @@ public class Final {
                 beanBrand.setId_brand(rs.getInt(1));
                 beanBrand.setName_brand(rs.getString(2));
                 beanBrand.setDescription(rs.getString(3));
+                lista.add(beanBrand);
                 //int id_brand = rs.getInt(beanBrand.getId_brand());
                 int id_brand = rs.getInt("id_brand");
                 String name_brand = rs.getString("name_brand");
@@ -218,9 +222,15 @@ public class Final {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Como lista:");
+        lista.print();
+        System.out.println();
+        System.out.println("List reversa:");
+        lista.printReverse();
     }
 
     public void printCategory() {
+        ListaCategory listaCategory = new ListaCategory();
         try {
             Statement st = getConnection().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM category");
@@ -228,11 +238,15 @@ public class Final {
             System.out.println("\u001B[32m" + "ID | Nombre de la categoría | Descripción");
             while (rs.next()) {
                 //int id_brand = rs.getInt(beanBrand.getId_brand());
+
+                BeanCategory beanCategory = new BeanCategory();
+                beanCategory.setId_category(rs.getInt(1));
+                beanCategory.setName_category(rs.getString(2));
+                beanCategory.setDescription(rs.getString(3));
                 int id_category = rs.getInt("id_category");
                 String name_category = rs.getString("name_category");
                 String description = rs.getString("description");
-
-
+                listaCategory.add(beanCategory);
                 System.out.format("\u001B[0m"+ "%s | %s | %s\n", id_category, name_category, description);
             }
             System.out.println("-----------------------------------");
@@ -240,9 +254,15 @@ public class Final {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Como lista:");
+        listaCategory.print();
+        System.out.println();
+        System.out.println("Lista reversa:");
+        listaCategory.printReverse();
     }
 
     public void printProduct() {
+        ListaProduct listaProduct = new ListaProduct();
         try {
             Statement st = getConnection().createStatement();
             ResultSet rs = st.executeQuery("SELECT id_product, name_product, quantity, price , 'description', name_category, name_brand FROM product a\n" +
@@ -251,6 +271,16 @@ public class Final {
             System.out.println("\u001B[32m" + "ID | Nombre del producto | Cantidad, | Precio | Descripción | Categoría | Marca");
             while (rs.next()) {
                 //int id_brand = rs.getInt(beanBrand.getId_brand());
+                BeanProduct beanProduct = new BeanProduct();
+                BeanCategory beanCategory = new BeanCategory();
+                BeanBrand beanBrand = new BeanBrand();
+                beanProduct.setBarnd_id_brand(rs.getInt(1));
+                beanProduct.setName(rs.getString(2));
+                beanProduct.setQuantity(rs.getInt(3));
+                beanProduct.setPrice(rs.getInt(4));
+                beanProduct.setDescription(rs.getString(5));
+                listaProduct.add(beanProduct);
+
                 int id_product= rs.getInt("id_product");
                 String name_product = rs.getString("name_product");
                 int quantity = rs.getInt("quantity");
@@ -267,6 +297,11 @@ public class Final {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Como lista:");
+        listaProduct.print();
+        System.out.println();
+        System.out.println("Lista reversa:");
+        listaProduct.printReverse();
     }
 
     public void deleteBrand(int id_brand) {

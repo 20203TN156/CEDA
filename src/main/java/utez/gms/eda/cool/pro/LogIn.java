@@ -12,9 +12,11 @@ import static utez.gms.eda.cool.Conexion.getConnection;
 
 public class LogIn {
 
+    User suer = new User();
+
     public boolean validate(BeanUser beanUser) throws SQLException {
 
-        boolean status = false;
+        boolean status;
 
         PreparedStatement preparedStatement = getConnection().prepareStatement(
                 "select * from user where user = ? and password = ? ");
@@ -39,12 +41,12 @@ public class LogIn {
             BeanUser beanUser = new BeanUser(user, password);
 
             if (logIn.validate(beanUser) == true) {
-                System.out.println("Bienvenido, " + beanUser.getUser());
+                System.out.println("Hola, " + beanUser.getUser());
                 Final finalXD = new Final();
                 finalXD.finalPrint();
                 i = 4;
             } else {
-                System.out.println("Upps... Esa no es.");
+                System.out.println("Usuario o contraseña incorrecto");
                 System.out.println("Llevas " + (i+1) + " intentos");
             }
         }

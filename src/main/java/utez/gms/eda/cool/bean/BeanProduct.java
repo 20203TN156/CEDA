@@ -8,6 +8,24 @@ public class BeanProduct {
     private String description;
     private int barnd_id_brand;
     private int category_id_category;
+    private BeanBrand beanBrand;
+    private BeanCategory beanCategory;
+
+    public BeanBrand getBeanBrand() {
+        return beanBrand;
+    }
+
+    public void setBeanBrand(BeanBrand beanBrand) {
+        this.beanBrand = beanBrand;
+    }
+
+    public BeanCategory getBeanCategory() {
+        return beanCategory;
+    }
+
+    public void setBeanCategory(BeanCategory beanCategory) {
+        this.beanCategory = beanCategory;
+    }
 
     public BeanProduct(String name, int quantity, double price, String description, int brand_id_brand,
                        int category_id_category) {
@@ -17,6 +35,10 @@ public class BeanProduct {
         this.description = description;
         this.barnd_id_brand = brand_id_brand;
         this.category_id_category = category_id_category;
+    }
+
+    public BeanProduct() {
+
     }
 
     public int getId_product() {
@@ -47,7 +69,7 @@ public class BeanProduct {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

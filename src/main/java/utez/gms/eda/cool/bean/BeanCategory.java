@@ -10,6 +10,10 @@ public class BeanCategory {
         this.description = description;
     }
 
+    public BeanCategory() {
+
+    }
+
     public int getId_category() {
         return id_category;
     }
@@ -22,8 +26,9 @@ public class BeanCategory {
         return name_category;
     }
 
-    public void setName_category(String name_category) {
+    public String setName_category(String name_category) {
         this.name_category = name_category;
+        return name_category;
     }
 
     public String getDescription() {
