@@ -1,5 +1,6 @@
 package utez.gms.eda.cool.pro;
 
+import utez.gms.eda.cool.Final;
 import utez.gms.eda.cool.bean.BeanUser;
 
 import java.sql.PreparedStatement;
@@ -28,18 +29,24 @@ public class LogIn {
         String user, password;
         LogIn logIn = new LogIn();
         Scanner print = new Scanner(System.in);
+        for (int i = 0; i <= 2; i++) {
 
-        System.out.println("****Iniciar Sesión****");
-        System.out.print("Usuario: ");
-        user = print.next();
-        System.out.print("Contraseña: ");
-        password = print.next();
-        BeanUser beanUser = new BeanUser(user, password);
+            System.out.println("****Iniciar Sesión****");
+            System.out.print("Usuario: ");
+            user = print.next();
+            System.out.print("Contraseña: ");
+            password = print.next();
+            BeanUser beanUser = new BeanUser(user, password);
 
-        if(logIn.validate(beanUser) == true){
-            System.out.println("Bienvenido, " + beanUser.getUser());
-        } else{
-            System.out.println("Huevos");
+            if (logIn.validate(beanUser) == true) {
+                System.out.println("Bienvenido, " + beanUser.getUser());
+                Final finalXD = new Final();
+                finalXD.finalPrint();
+                i = 4;
+            } else {
+                System.out.println("Upps... Esa no es.");
+                System.out.println("Llevas " + (i+1) + " intentos");
+            }
         }
     }
 }
